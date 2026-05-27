@@ -55,6 +55,14 @@ public class CartService {
         }
     }
 
+    public List<CartItem> findCartEntities(Long memberId) {
+        return cartItemRepository.findByMemberId(memberId);
+    }
+
+    public List<CartItem> findCartEntitiesById(Long memberId, List<Long> cartItemId) {
+        return cartItemRepository.findByIdInAndMember_IdWithProduct(cartItemId, memberId);
+    }
+
     private CartItemResponse toResponse(CartItem item) {
         return new CartItemResponse(
                 item.getId(),
